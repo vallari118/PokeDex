@@ -1,0 +1,69 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class="center" *ngIf="pokeDataService.pokeDataArr[0]">
+    <button mat-fab color="primary" [routerLink]="['/pokedex']">Back</button>
+    <mat-card class="example-card mat-elevation-z4">
+        <mat-card-header>
+
+            <mat-card-title>{{pokeDataService.pokeDataArr[0].name}}</mat-card-title>
+            <mat-card-subtitle>Type {{pokeDataService.pokeDataArr[0].type}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://pokeres.bastionbot.org/images/pokemon/{{pokeDataService.pokeDataArr[0].id}}.png" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <p>
+                {{pokeDataService.pokeDataArr[0].name}} is found in {{pokeDataService.pokeDataArr[0].habitat}}. It is of {{pokeDataService.pokeDataArr[0].color}} color and with height {{pokeDataService.pokeDataArr[0].height}} and weight {{pokeDataService.pokeDataArr[0].weight}}.
+            </p>
+            <p>
+                Its growth rate is {{pokeDataService.pokeDataArr[0].growthRate}}. Press more details to get more information.
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="getMoreDetails()">More Details</button>
+
+        </mat-card-actions>
+    </mat-card>
+
+    <div class="details" *ngIf="checkedMoreDetails">
+        <p> Type </p>
+        <div class="row">
+            <div class="col-md-3 mx-auto my-2" *ngFor="let type of pokeDataService.pokeDataArr[0].type">
+                <button type="button" class="btn btn-outline-dark" [routerLink]="['/pokedex/type', type]">{{type}}</button>
+            </div>
+        </div>
+        <hr>
+        <p> Strength Against </p>
+        <div class="row">
+            <div class="col-md-3 mx-auto my-2" *ngFor="let strength of pokeDataService.pokeDataArr[0].damageTo">
+                <button type="button" class="btn btn-outline-primary" [routerLink]="['/pokedex/type', strength]">{{strength}}</button>
+            </div>
+        </div>
+        <hr>
+        <p> Weakness Against </p>
+        <div class="row">
+            <div class="col-md-3 mx-auto my-2" *ngFor="let weakness of pokeDataService.pokeDataArr[0].damageFrom">
+                <button type="button" class="btn btn-outline-danger" [routerLink]="['/pokedex/type', weakness]">{{weakness}}</button>
+            </div>
+        </div>
+        <hr>
+        <p>Best Moves</p>
+        <div class="row">
+            <div class="col-md-5 mx-auto my-2" *ngFor="let moves of pokeDataService.pokeDataArr[0].moves">
+
+                <button type="button" class="btn btn-outline-success">{{moves}}</button>
+            </div>
+        </div>
+        <hr>
+        <div *ngIf="pokeDataService.pokeDataArr[0].evolvedFrom; else elseBlock">
+            <p>Is evolved from <a [routerLink]="['/pokedex/pokemon', pokeDataService.pokeDataArr[0].evolvedFrom]"><b>{{pokeDataService.pokeDataArr[0].evolvedFrom}}</b></a></p>
+        </div>
+        <ng-template #elseBlock>
+            Is a base Pokemon
+        </ng-template>
+        <hr>
+        <div *ngIf="pokeDataService.pokeDataArr[0].legendary">
+            <p><b>Is a Legendary Pokemon</b></p>
+        </div>
+    </div>
+
+</div>

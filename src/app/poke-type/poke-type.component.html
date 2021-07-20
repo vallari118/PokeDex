@@ -1,0 +1,19 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading.....</p>
+</ngx-spinner>
+
+<div class="center" *ngIf="pokeDataService.pokeNames">
+    <button mat-fab color="primary" [routerLink]="['/pokedex']">Back</button>
+    <div class="row">
+        <div class="col-md-3 mx-auto my-5" *ngFor="let pokemon of pokeDataService.pokeNames">
+            <mat-card class="mat-elevation-z4" *ngIf="pokemon" [routerLink]="['/pokedex/pokemon', pokemon.name]">
+                <mat-card-header>
+                    <mat-card-title>{{pokemon.name}}</mat-card-title>
+
+                </mat-card-header>
+                <img mat-card-image src="https://pokeres.bastionbot.org/images/pokemon/{{pokemon.id}}.png" alt="Photo of a {{pokemon.name}}">
+
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class="center alert alert-danger" role="alert" *ngIf="pokeDataService.errors.length>0">
+    {{pokeDataService.errors[0]}}
+</div>
+<div class="center">
+    <!-- <label style="text-align: center; font-size: medium;">Search with Pokemon Name or Type</label> -->
+    <br>
+    <div class="example-button-row" *ngIf="!isSearchClicked">
+        <!--  -->
+        <button mat-raised-button class="imageName" color="primary" id="name" (click)="getEventId($event)"> Pokemon Name</button>
+        <!-- <label>Search with Pokemon Type</label> -->
+        <button mat-raised-button class="imageType" color="warn" id="type" (click)="getEventId($event)">Pokemon Type</button>
+    </div>
+    <div *ngIf="isSearchClicked && id">
+        <div class="input-group" *ngIf="id=='name'">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Pokemon Name</mat-label>
+                <input type="text" placeholder="Ex. Pikachu" aria-label="Pokemon" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="nameOrType">
+
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+                        {{ option.name }}
+                    </mat-option>
+                </mat-autocomplete>
+
+            </mat-form-field>
+
+        </div>
+        <div class="input-group" *ngIf="id=='type'">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Pokemon Type</mat-label>
+                <input type="text" placeholder="Ex. Fire" aria-label="Pokemon" matInput [(ngModel)]="nameOrType">
+
+            </mat-form-field>
+        </div>
+        <span class="input-group-append" *ngIf="nameOrType">
+                
+            <button color="dark" mat-fab id="{{id}}" (click)="getPokeInfo(id)" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+            <button mat-fab color="primary" id="{{id}}" (click)="getBack()" [routerLink]="['/pokedex']">Back</button>
+            
+         </span>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+/* .img1 {
+    height: 200px;
+    width: 200px;
+} */
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.example-button-row {
+    display: flex;
+    width: 30%;
+    height: 30%;
+    justify-content: center;
+}
+
+.example-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+}
+
+.icon-display {
+    transform: scale(2);
+}
+
+.example-full-width {
+    max-width: 100%;
+    max-height: fit-content;
+}
+
+button.mat-raised-button {
+    border: none;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50%;
+    height: 200px;
+    width: 300px;
+}
+
+.imageName {
+    background-image: url('https://pokeres.bastionbot.org/images/pokemon/25.png');
+    background-size: cover;
+}
+
+.imageType {
+    background-image: url("../../assets/images/fireType.png");
+    background-size: cover;
+}
